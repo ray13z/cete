@@ -1,0 +1,22 @@
+table td a {
+    float: right;
+    color: #ee5f5b;
+}
+
+table td a:hover {
+    color: #bd362f;   
+}
+
+table .alert {
+    padding: 1px;
+    margin-bottom: 0px; 
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.alert-dismissable .close {
+    position: relative;
+    top: 1px;
+    right: 5px;
+    color: inherit;
+}
