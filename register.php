@@ -131,32 +131,29 @@
                 $('div.container').find('span').hide();
                 $('form.form-signin').find('button').prop('disabled', true);
                 
-                var usernameOk = false;
-                var emailOk = false;
-                var passwordOk = false;
+                var usernameOk  = false;
+                var emailOk     = false;
+                var passwordOk  = false;
                 
-                $('input').keyup(function(){
-                    var div = $(this).parent();
-                    var id = $(this).attr('id');
+                $('input').keyup(function(){                    
+                    var div     = $(this).parent();
+                    var id      = $(this).attr('id');
                     
-                    var text = $(this).val();
+                    var text    = $(this).val();
                         
                     if(id === 'username') {
                         RemoveAllWarningsFromDiv(div);
+                        usernameOk = false;
                         
                         if(text.length <= 3) {
                             AddWarningToDiv(div, 'username too short');
-                            
-                            usernameOk = false;
                         }
-                        else {
-                            
-                            usernameOk = false;
-                            
+                        else {                            
                             // AJAX drops the bass here
                             var request     = $.ajax({
                                                 url: 'process_.php',
                                                 type: "POST",
+                                                async: false,
                                                 data: {action:'checkUsername',username:text}
                                             });
                             
@@ -169,7 +166,6 @@
                                     
                                     if(avail === 'true') {
                                         AddSuccessToDiv(div, desc);
-                                        
                                         usernameOk = true;
                                     } else {
                                         AddErrorToDiv(div, desc);
@@ -189,19 +185,16 @@
                         
                     } else if(id === 'email') {
                         RemoveAllWarningsFromDiv(div);
+                        emailOk = false;
                         
                         if(!IsEmail(text)) {
                             AddWarningToDiv(div, 'please enter a valid email address');
-                            
-                            emailOk = false;
                         } else {
-                            
-                            emailOk = false;
-                            
                             // AJAX drops the bass here
                             var request     = $.ajax({
                                                 url: 'process_.php',
                                                 type: "POST",
+                                                async: false,
                                                 data: {action:'checkEmail',email:text}
                                             });
                             
@@ -214,7 +207,6 @@
                                     
                                     if(avail === 'true') {
                                         AddSuccessToDiv(div, desc);
-                                        
                                         emailOk = true;
                                     } else {
                                         AddErrorToDiv(div, desc);
@@ -234,15 +226,13 @@
                         
                     } else if(id === 'password') {
                         RemoveAllWarningsFromDiv(div);
+                        passwordOk = false;
                         
                         if(text.length <= 6) {
                             AddWarningToDiv(div, 'password too short');
-                            
-                            passwordOk = false;
                         }
                         else {
                             AddSuccessToDiv(div, '');
-                            
                             passwordOk = true;
                         }
                         
@@ -250,9 +240,12 @@
                         console.log("error: incorrect 'input' id");   
                     }
                     
-                    if(usernameOk && emailOk && passwordOk){
+                    if(usernameOk === true && emailOk === true && passwordOk === true){
                         // Enable 'submit' button only if all inputs are valid
                         $('form.form-signin').find('button').prop('disabled', false);
+                    }
+                    else {
+                        $('form.form-signin').find('button').prop('disabled', true);   
                     }
                     
                 });
