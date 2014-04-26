@@ -90,7 +90,9 @@
                         
 //                        //debug 
 //                        echo "$cmd\n";
+//                        echo '{"result":"$result"}';
 //                        var_dump($result);
+//                        exit;
 
                         $prog_name  = $file;
                         $complexity = $result[0];
