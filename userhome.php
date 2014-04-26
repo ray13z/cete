@@ -17,6 +17,7 @@
 		
 		<?php
 			require("config.php");
+            include 'process.php';
     
             // Redirect if not logged in
             if(empty($_SESSION['user'])) {
@@ -25,6 +26,11 @@
             }
 
             $username = $_SESSION['user']['username'];
+            
+            // Deleting upload directory if exists
+            $directory = 'mini-upload-form' . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR . $username;
+
+            deleteDir($directory);
 		?>
 
 		<!-- Bootstrap core CSS -->
