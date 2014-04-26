@@ -25,7 +25,7 @@ if(isset($_FILES['upl']) && $_FILES['upl']['error'] == 0){
     $directory = 'uploads/'.$username;
     
     if(!is_dir($directory)) {
-        mkdir($directory) or die('{"status":"error"}');
+        mkdir($directory) or die('{"status":"error","description":"upload.php: Could not create directory"}');
 //        mkdir($directory) or die('{"status":"error","descritpion":"could not create directory"}');
 //        echo "created directoty!";    
     }
@@ -41,7 +41,7 @@ if(isset($_FILES['upl']) && $_FILES['upl']['error'] == 0){
 
 
     if(move_uploaded_file($_FILES['upl']['tmp_name'], $directory.'/'.$_FILES['upl']['name'])) {
-        
+//        echo '{"file moved"}';
         // Run Checker
         $response = runChecker();
 //        echo $response;
