@@ -159,7 +159,8 @@
             
             case 'deleteResultRow' : 
                 if(isset($_POST['id'])) {
-                    $id = trim(explode("-", $_POST['id'])[1]);
+                    $array = explode("-", $_POST['id']);
+                    $id = trim($array[1]);
 //                    echo '{"status":"success","text":"id = ' . $id . '"}';
                     
                     $query = "
